@@ -9,6 +9,8 @@ struct ContentView: View {
     @State private var searchQuery = ""
     @FocusState private var isSearchFieldFocused: Bool
     @Environment(\.editMode) var editMode
+    @State private var selectedMemos = Set<UUID>()
+    @State private var showingDeleteAlert = false
 
     var filteredMemos: [Memo] {
         var memos = memoStore.memos
@@ -46,6 +48,7 @@ struct ContentView: View {
                         withAnimation {
                             if editMode?.wrappedValue.isEditing == true {
                                 editMode?.wrappedValue = .inactive
+                                selectedMemos.removeAll()
                             } else {
                                 editMode?.wrappedValue = .active
                             }
@@ -96,26 +99,52 @@ struct ContentView: View {
                     .background(Color(uiColor: .systemGray6))
                     .cornerRadius(8)
 
-                    Button(action: {
-                        showingAddMemo = true
-                    }) {
-                        Image(systemName: "plus")
-                            .font(.system(size: 20, weight: .semibold))
-                            .foregroundColor(.white)
-                            .frame(width: 36, height: 36)
-                            .background(
-                                Circle()
-                                    .fill(
-                                        LinearGradient(
-                                            gradient: Gradient(colors: [Color.blue, Color.blue.opacity(0.8)]),
-                                            startPoint: .topLeading,
-                                            endPoint: .bottomTrailing
+                    if editMode?.wrappedValue.isEditing == true {
+                        Button(action: {
+                            if !selectedMemos.isEmpty {
+                                showingDeleteAlert = true
+                            }
+                        }) {
+                            Image(systemName: "trash")
+                                .font(.system(size: 20, weight: .semibold))
+                                .foregroundColor(.white)
+                                .frame(width: 36, height: 36)
+                                .background(
+                                    Circle()
+                                        .fill(
+                                            LinearGradient(
+                                                gradient: Gradient(colors: selectedMemos.isEmpty ? [Color.gray, Color.gray.opacity(0.8)] : [Color.red, Color.red.opacity(0.8)]),
+                                                startPoint: .topLeading,
+                                                endPoint: .bottomTrailing
+                                            )
                                         )
-                                    )
-                                    .shadow(color: Color.blue.opacity(0.3), radius: 4, x: 0, y: 2)
-                            )
+                                        .shadow(color: selectedMemos.isEmpty ? Color.gray.opacity(0.3) : Color.red.opacity(0.3), radius: 4, x: 0, y: 2)
+                                )
+                        }
+                        .buttonStyle(ScaleButtonStyle())
+                        .disabled(selectedMemos.isEmpty)
+                    } else {
+                        Button(action: {
+                            showingAddMemo = true
+                        }) {
+                            Image(systemName: "plus")
+                                .font(.system(size: 20, weight: .semibold))
+                                .foregroundColor(.white)
+                                .frame(width: 36, height: 36)
+                                .background(
+                                    Circle()
+                                        .fill(
+                                            LinearGradient(
+                                                gradient: Gradient(colors: [Color.blue, Color.blue.opacity(0.8)]),
+                                                startPoint: .topLeading,
+                                                endPoint: .bottomTrailing
+                                            )
+                                        )
+                                        .shadow(color: Color.blue.opacity(0.3), radius: 4, x: 0, y: 2)
+                                )
+                        }
+                        .buttonStyle(ScaleButtonStyle())
                     }
-                    .buttonStyle(ScaleButtonStyle())
                 }
                 .padding(.horizontal)
                 .padding(.vertical, 10)
@@ -166,59 +195,120 @@ struct ContentView: View {
                                 .listRowSeparator(.hidden)
                             } else {
                                 ForEach(filteredMemos) { memo in
-                                    NavigationLink(destination: MemoDetailView(memo: memo, memoStore: memoStore)) {
-                                        VStack(alignment: .leading, spacing: 8) {
-                                            HStack {
-                                                Text(memo.title)
-                                                    .font(.headline)
-                                                    .fontWeight(.semibold)
-                                                Spacer()
-                                                HStack(spacing: 4) {
-                                                    Circle()
-                                                        .fill(memo.category.uiColor)
-                                                        .frame(width: 8, height: 8)
-                                                    Text(memo.category.name)
-                                                        .font(.caption)
-                                                        .fontWeight(.medium)
-                                                        .foregroundColor(memo.category.uiColor)
+                                    let isEditing = editMode?.wrappedValue.isEditing == true
+                                    let isSelected = selectedMemos.contains(memo.id)
+
+                                    if isEditing {
+                                        HStack(spacing: 12) {
+                                            Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
+                                                .font(.system(size: 24))
+                                                .foregroundColor(isSelected ? .blue : .gray.opacity(0.3))
+
+                                            NavigationLink(destination: MemoDetailView(memo: memo, memoStore: memoStore)) {
+                                                VStack(alignment: .leading, spacing: 8) {
+                                                    HStack {
+                                                        Text(memo.title)
+                                                            .font(.headline)
+                                                            .fontWeight(.semibold)
+                                                        Spacer()
+                                                        HStack(spacing: 4) {
+                                                            Circle()
+                                                                .fill(memo.category.uiColor)
+                                                                .frame(width: 8, height: 8)
+                                                            Text(memo.category.name)
+                                                                .font(.caption)
+                                                                .fontWeight(.medium)
+                                                                .foregroundColor(memo.category.uiColor)
+                                                        }
+                                                        .padding(.horizontal, 10)
+                                                        .padding(.vertical, 5)
+                                                        .background(
+                                                            memo.category.uiColor.opacity(0.15)
+                                                        )
+                                                        .cornerRadius(12)
+                                                    }
+                                                    Text(memo.content)
+                                                        .font(.subheadline)
+                                                        .foregroundColor(.secondary)
+                                                        .lineLimit(2)
+                                                    HStack {
+                                                        Image(systemName: "calendar")
+                                                            .font(.system(size: 11))
+                                                            .foregroundColor(.gray)
+                                                        Text(memo.createdAt, style: .date)
+                                                            .font(.caption)
+                                                            .foregroundColor(.gray)
+                                                    }
                                                 }
-                                                .padding(.horizontal, 10)
-                                                .padding(.vertical, 5)
-                                                .background(
-                                                    memo.category.uiColor.opacity(0.15)
-                                                )
-                                                .cornerRadius(12)
+                                                .padding(.vertical, 8)
+                                                .padding(.horizontal, 4)
                                             }
-                                            Text(memo.content)
-                                                .font(.subheadline)
-                                                .foregroundColor(.secondary)
-                                                .lineLimit(2)
-                                            HStack {
-                                                Image(systemName: "calendar")
-                                                    .font(.system(size: 11))
-                                                    .foregroundColor(.gray)
-                                                Text(memo.createdAt, style: .date)
-                                                    .font(.caption)
-                                                    .foregroundColor(.gray)
+                                            .disabled(true)
+                                        }
+                                        .contentShape(Rectangle())
+                                        .onTapGesture {
+                                            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                                                if isSelected {
+                                                    selectedMemos.remove(memo.id)
+                                                } else {
+                                                    selectedMemos.insert(memo.id)
+                                                }
                                             }
                                         }
-                                        .padding(.vertical, 8)
-                                        .padding(.horizontal, 4)
-                                    }
-                                    .listRowBackground(
-                                        RoundedRectangle(cornerRadius: 12)
-                                            .fill(Color(uiColor: .systemBackground))
-                                            .shadow(color: Color.black.opacity(0.05), radius: 3, x: 0, y: 2)
-                                            .padding(.vertical, 4)
-                                    )
-                                    .listRowSeparator(.hidden)
-                                }
-                                .onDelete { indexSet in
-                                    withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
-                                        let memosToDelete = indexSet.map { filteredMemos[$0] }
-                                        for memo in memosToDelete {
-                                            memoStore.deleteMemo(memo)
+                                        .listRowBackground(
+                                            RoundedRectangle(cornerRadius: 12)
+                                                .fill(isSelected ? Color.blue.opacity(0.05) : Color(uiColor: .systemBackground))
+                                                .shadow(color: Color.black.opacity(0.05), radius: 3, x: 0, y: 2)
+                                                .padding(.vertical, 4)
+                                        )
+                                        .listRowSeparator(.hidden)
+                                    } else {
+                                        NavigationLink(destination: MemoDetailView(memo: memo, memoStore: memoStore)) {
+                                            VStack(alignment: .leading, spacing: 8) {
+                                                HStack {
+                                                    Text(memo.title)
+                                                        .font(.headline)
+                                                        .fontWeight(.semibold)
+                                                    Spacer()
+                                                    HStack(spacing: 4) {
+                                                        Circle()
+                                                            .fill(memo.category.uiColor)
+                                                            .frame(width: 8, height: 8)
+                                                        Text(memo.category.name)
+                                                            .font(.caption)
+                                                            .fontWeight(.medium)
+                                                            .foregroundColor(memo.category.uiColor)
+                                                    }
+                                                    .padding(.horizontal, 10)
+                                                    .padding(.vertical, 5)
+                                                    .background(
+                                                        memo.category.uiColor.opacity(0.15)
+                                                    )
+                                                    .cornerRadius(12)
+                                                }
+                                                Text(memo.content)
+                                                    .font(.subheadline)
+                                                    .foregroundColor(.secondary)
+                                                    .lineLimit(2)
+                                                HStack {
+                                                    Image(systemName: "calendar")
+                                                        .font(.system(size: 11))
+                                                        .foregroundColor(.gray)
+                                                    Text(memo.createdAt, style: .date)
+                                                        .font(.caption)
+                                                        .foregroundColor(.gray)
+                                                }
+                                            }
+                                            .padding(.vertical, 8)
+                                            .padding(.horizontal, 4)
                                         }
+                                        .listRowBackground(
+                                            RoundedRectangle(cornerRadius: 12)
+                                                .fill(Color(uiColor: .systemBackground))
+                                                .shadow(color: Color.black.opacity(0.05), radius: 3, x: 0, y: 2)
+                                                .padding(.vertical, 4)
+                                        )
+                                        .listRowSeparator(.hidden)
                                     }
                                 }
                             }
@@ -289,6 +379,22 @@ struct ContentView: View {
             }
             .sheet(isPresented: $showingAddMemo) {
                 AddMemoView(memoStore: memoStore)
+            }
+            .alert("메모 삭제", isPresented: $showingDeleteAlert) {
+                Button("취소", role: .cancel) { }
+                Button("삭제", role: .destructive) {
+                    withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                        for memoId in selectedMemos {
+                            if let memo = memoStore.memos.first(where: { $0.id == memoId }) {
+                                memoStore.deleteMemo(memo)
+                            }
+                        }
+                        selectedMemos.removeAll()
+                        editMode?.wrappedValue = .inactive
+                    }
+                }
+            } message: {
+                Text("\(selectedMemos.count)개의 메모를 삭제하시겠습니까?")
             }
         }
     }
