@@ -464,9 +464,7 @@ struct AddMemoView: View {
     @State private var showingTimePicker = false
     @State private var showingAddCategory = false
     @State private var newCategoryName = ""
-    @State private var newCategoryColor = "blue"
-
-    let availableColors = ["blue", "green", "purple", "red", "orange", "yellow"]
+    @State private var newCategoryColor = Color.blue
 
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -487,15 +485,35 @@ struct AddMemoView: View {
                     TextField("제목을 입력하세요", text: $title)
                 }
                 Section(header: Text("카테고리")) {
-                    Picker("카테고리 선택", selection: $selectedCategory) {
+                    Menu {
                         ForEach(memoStore.categories) { category in
-                            HStack {
+                            Button(action: {
+                                selectedCategory = category
+                            }) {
+                                HStack {
+                                    Circle()
+                                        .fill(category.uiColor)
+                                        .frame(width: 12, height: 12)
+                                    Text(category.name)
+                                }
+                            }
+                        }
+                    } label: {
+                        HStack {
+                            if let category = selectedCategory {
                                 Circle()
                                     .fill(category.uiColor)
                                     .frame(width: 12, height: 12)
                                 Text(category.name)
+                                    .foregroundColor(.primary)
+                            } else {
+                                Text("카테고리 선택")
+                                    .foregroundColor(.secondary)
                             }
-                            .tag(Optional(category))
+                            Spacer()
+                            Image(systemName: "chevron.up.chevron.down")
+                                .font(.system(size: 12))
+                                .foregroundColor(.secondary)
                         }
                     }
                     Button(action: {
@@ -592,18 +610,7 @@ struct AddMemoView: View {
                             TextField("이름을 입력하세요", text: $newCategoryName)
                         }
                         Section(header: Text("색상")) {
-                            Picker("색상 선택", selection: $newCategoryColor) {
-                                ForEach(availableColors, id: \.self) { color in
-                                    HStack {
-                                        Circle()
-                                            .fill(Category(name: "", color: color).uiColor)
-                                            .frame(width: 20, height: 20)
-                                        Text(color)
-                                    }
-                                    .tag(color)
-                                }
-                            }
-                            .pickerStyle(.menu)
+                            ColorPicker("색상 선택", selection: $newCategoryColor)
                         }
                     }
                     .navigationTitle("새 카테고리")
@@ -618,7 +625,7 @@ struct AddMemoView: View {
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Button("추가") {
                                 if !newCategoryName.isEmpty {
-                                    memoStore.addCategory(name: newCategoryName, color: newCategoryColor)
+                                    memoStore.addCategory(name: newCategoryName, color: newCategoryColor.toHex())
                                     selectedCategory = memoStore.categories.last
                                     showingAddCategory = false
                                     newCategoryName = ""
