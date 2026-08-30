@@ -12,6 +12,7 @@
 		1A000005 /* Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A000004 /* Memo.swift */; };
 		1A000007 /* MemoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A000006 /* MemoDetailView.swift */; };
 		1A000009 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A000008 /* Assets.xcassets */; };
+		1A00001A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A000020 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,8 @@
 		1A000006 /* MemoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoDetailView.swift; sourceTree = "<group>"; };
 		1A000008 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A00000A /* MyMemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyMemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A000019 /* MyMemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyMemo.entitlements; sourceTree = "<group>"; };
+		1A000020 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,7 +44,9 @@
 				1A000002 /* ContentView.swift */,
 				1A000004 /* Memo.swift */,
 				1A000006 /* MemoDetailView.swift */,
+				1A000020 /* SettingsView.swift */,
 				1A000008 /* Assets.xcassets */,
+				1A000019 /* MyMemo.entitlements */,
 			);
 			path = MyMemo;
 			sourceTree = "<group>";
@@ -129,6 +134,7 @@
 				1A000003 /* ContentView.swift in Sources */,
 				1A000005 /* Memo.swift in Sources */,
 				1A000007 /* MemoDetailView.swift in Sources */,
+				1A00001A /* SettingsView.swift in Sources */,
 				1A000001 /* MyMemoApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -260,6 +266,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MyMemo/MyMemo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
@@ -289,6 +296,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MyMemo/MyMemo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";

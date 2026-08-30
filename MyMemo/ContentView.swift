@@ -4,6 +4,7 @@ struct ContentView: View {
     @StateObject private var memoStore = MemoStore()
     @State private var showingAddMemo = false
     @State private var showingSearchHistory = false
+    @State private var showingSettings = false
     @State private var selectedFilter: Category?
     @State private var searchText = ""
     @State private var searchQuery = ""
@@ -42,8 +43,17 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                // 상단 바: 편집 + 검색창 + 추가 버튼
+                // 상단 바: 설정 + 편집 + 검색창 + 추가 버튼
                 HStack(spacing: 12) {
+                    // 설정 버튼
+                    Button(action: {
+                        showingSettings = true
+                    }) {
+                        Image(systemName: "gearshape")
+                            .foregroundColor(.blue)
+                            .font(.system(size: 20))
+                    }
+
                     Button(editMode?.wrappedValue.isEditing == true ? "완료" : "편집") {
                         withAnimation {
                             if editMode?.wrappedValue.isEditing == true {
@@ -379,6 +389,9 @@ struct ContentView: View {
             }
             .sheet(isPresented: $showingAddMemo) {
                 AddMemoView(memoStore: memoStore)
+            }
+            .sheet(isPresented: $showingSettings) {
+                SettingsView()
             }
             .alert("메모 삭제", isPresented: $showingDeleteAlert) {
                 Button("취소", role: .cancel) { }

@@ -96,10 +96,62 @@ class MemoStore: ObservableObject {
     private let categoriesKey = "categories"
     private let searchHistoryKey = "searchHistory"
 
+    private let iCloudStore = NSUbiquitousKeyValueStore.default
+
+    // iCloud 동기화 사용 여부
+    private var useICloudSync: Bool {
+        UserDefaults.standard.bool(forKey: "useICloudSync")
+    }
+
     init() {
         loadCategories()
         loadMemos()
         loadSearchHistory()
+
+        // iCloud 변경 사항 감지를 위한 옵저버 등록
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(iCloudStoreDidChange),
+            name: NSUbiquitousKeyValueStore.didChangeExternallyNotification,
+            object: iCloudStore
+        )
+
+        // 설정 변경 감지
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(settingsDidChange),
+            name: UserDefaults.didChangeNotification,
+            object: nil
+        )
+
+        // iCloud 동기화 시작 (설정이 켜져있을 때만)
+        if useICloudSync {
+            iCloudStore.synchronize()
+        }
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc private func iCloudStoreDidChange(notification: Notification) {
+        // iCloud가 활성화되어 있을 때만 변경 사항 반영
+        if useICloudSync {
+            DispatchQueue.main.async { [weak self] in
+                self?.loadMemos()
+                self?.loadCategories()
+                self?.loadSearchHistory()
+            }
+        }
+    }
+
+    @objc private func settingsDidChange(notification: Notification) {
+        // 설정이 변경되면 데이터 다시 로드
+        DispatchQueue.main.async { [weak self] in
+            self?.loadMemos()
+            self?.loadCategories()
+            self?.loadSearchHistory()
+        }
     }
 
     func addMemo(title: String, content: String, category: Category, createdAt: Date = Date()) {
@@ -134,12 +186,24 @@ class MemoStore: ObservableObject {
 
     private func saveMemos() {
         if let encoded = try? JSONEncoder().encode(memos) {
-            UserDefaults.standard.set(encoded, forKey: memosKey)
+            if useICloudSync {
+                iCloudStore.set(encoded, forKey: memosKey)
+                iCloudStore.synchronize()
+            } else {
+                UserDefaults.standard.set(encoded, forKey: memosKey)
+            }
         }
     }
 
     private func loadMemos() {
-        if let data = UserDefaults.standard.data(forKey: memosKey),
+        let data: Data?
+        if useICloudSync {
+            data = iCloudStore.data(forKey: memosKey)
+        } else {
+            data = UserDefaults.standard.data(forKey: memosKey)
+        }
+
+        if let data = data,
            let decoded = try? JSONDecoder().decode([Memo].self, from: data) {
             memos = decoded
         }
@@ -147,12 +211,24 @@ class MemoStore: ObservableObject {
 
     private func saveCategories() {
         if let encoded = try? JSONEncoder().encode(categories) {
-            UserDefaults.standard.set(encoded, forKey: categoriesKey)
+            if useICloudSync {
+                iCloudStore.set(encoded, forKey: categoriesKey)
+                iCloudStore.synchronize()
+            } else {
+                UserDefaults.standard.set(encoded, forKey: categoriesKey)
+            }
         }
     }
 
     private func loadCategories() {
-        if let data = UserDefaults.standard.data(forKey: categoriesKey),
+        let data: Data?
+        if useICloudSync {
+            data = iCloudStore.data(forKey: categoriesKey)
+        } else {
+            data = UserDefaults.standard.data(forKey: categoriesKey)
+        }
+
+        if let data = data,
            let decoded = try? JSONDecoder().decode([Category].self, from: data) {
             categories = decoded
         } else {
@@ -193,12 +269,24 @@ class MemoStore: ObservableObject {
 
     private func saveSearchHistory() {
         if let encoded = try? JSONEncoder().encode(searchHistory) {
-            UserDefaults.standard.set(encoded, forKey: searchHistoryKey)
+            if useICloudSync {
+                iCloudStore.set(encoded, forKey: searchHistoryKey)
+                iCloudStore.synchronize()
+            } else {
+                UserDefaults.standard.set(encoded, forKey: searchHistoryKey)
+            }
         }
     }
 
     private func loadSearchHistory() {
-        if let data = UserDefaults.standard.data(forKey: searchHistoryKey),
+        let data: Data?
+        if useICloudSync {
+            data = iCloudStore.data(forKey: searchHistoryKey)
+        } else {
+            data = UserDefaults.standard.data(forKey: searchHistoryKey)
+        }
+
+        if let data = data,
            let decoded = try? JSONDecoder().decode([SearchHistory].self, from: data) {
             searchHistory = decoded
         }
