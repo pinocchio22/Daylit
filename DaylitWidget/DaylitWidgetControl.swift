@@ -1,6 +1,6 @@
 //
-//  MyMemoWidgetControl.swift
-//  MyMemoWidget
+//  DaylitWidgetControl.swift
+//  DaylitWidget
 //
 //  Created by JINHUN CHOI on 8/31/26.
 //
@@ -9,10 +9,11 @@ import AppIntents
 import SwiftUI
 import WidgetKit
 
-struct MyMemoWidgetControl: ControlWidget {
+@available(iOS 18.0, *)
+struct DaylitWidgetControl: ControlWidget {
     var body: some ControlWidgetConfiguration {
         StaticControlConfiguration(
-            kind: "com.p2glet.MyMemo.MyMemoWidget",
+            kind: "com.p2glet.Daylit.DaylitWidget",
             provider: Provider()
         ) { value in
             ControlWidgetToggle(
@@ -28,7 +29,8 @@ struct MyMemoWidgetControl: ControlWidget {
     }
 }
 
-extension MyMemoWidgetControl {
+@available(iOS 18.0, *)
+extension DaylitWidgetControl {
     struct Provider: ControlValueProvider {
         var previewValue: Bool {
             false
@@ -41,6 +43,7 @@ extension MyMemoWidgetControl {
     }
 }
 
+@available(iOS 18.0, *)
 struct StartTimerIntent: SetValueIntent {
     static let title: LocalizedStringResource = "Start a timer"
 

@@ -53,7 +53,7 @@ struct MemoTimelineProvider: TimelineProvider {
 }
 
 // MARK: - Widget View
-struct MyMemoWidgetView: View {
+struct DaylitWidgetView: View {
     let entry: MemoEntry
 
     var body: some View {
@@ -143,16 +143,16 @@ struct DayColumn: View {
 }
 
 // MARK: - Widget Configuration
-struct MyMemoWidget: Widget {
-    let kind: String = "MyMemoWidget"
+struct DaylitWidget: Widget {
+    let kind: String = "DaylitWidget"
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: MemoTimelineProvider()) { entry in
             if #available(iOS 17.0, *) {
-                MyMemoWidgetView(entry: entry)
+                DaylitWidgetView(entry: entry)
                     .containerBackground(.fill.tertiary, for: .widget)
             } else {
-                MyMemoWidgetView(entry: entry)
+                DaylitWidgetView(entry: entry)
                     .padding()
                     .background()
             }
@@ -166,7 +166,7 @@ struct MyMemoWidget: Widget {
 // MARK: - Preview
 @available(iOS 17.0, *)
 #Preview(as: .systemMedium) {
-    MyMemoWidget()
+    DaylitWidget()
 } timeline: {
     MemoEntry(date: Date(), weekData: [])
 }

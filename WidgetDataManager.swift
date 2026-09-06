@@ -21,7 +21,7 @@ struct WidgetMemo: Codable {
 class WidgetDataManager {
     static let shared = WidgetDataManager()
 
-    private let appGroupID = "group.com.p2glet.MyMemo"
+    private let appGroupID = "group.com.p2glet.Daylit"
     private let memosKey = "widget_memos"
 
     private var userDefaults: UserDefaults? {

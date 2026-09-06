@@ -1,6 +1,6 @@
 //
-//  MyMemoWidgetLiveActivity.swift
-//  MyMemoWidget
+//  DaylitWidgetLiveActivity.swift
+//  DaylitWidget
 //
 //  Created by JINHUN CHOI on 8/31/26.
 //
@@ -9,7 +9,7 @@ import ActivityKit
 import SwiftUI
 import WidgetKit
 
-struct MyMemoWidgetAttributes: ActivityAttributes {
+struct DaylitWidgetAttributes: ActivityAttributes {
     public struct ContentState: Codable, Hashable {
         // Dynamic stateful properties about your activity go here!
         var emoji: String
@@ -19,9 +19,9 @@ struct MyMemoWidgetAttributes: ActivityAttributes {
     var name: String
 }
 
-struct MyMemoWidgetLiveActivity: Widget {
+struct DaylitWidgetLiveActivity: Widget {
     var body: some WidgetConfiguration {
-        ActivityConfiguration(for: MyMemoWidgetAttributes.self) { context in
+        ActivityConfiguration(for: DaylitWidgetAttributes.self) { context in
             // Lock screen/banner UI goes here
             VStack {
                 Text("Hello \(context.state.emoji)")
@@ -76,26 +76,26 @@ struct MyMemoWidgetLiveActivity: Widget {
     }
 }
 
-private extension MyMemoWidgetAttributes {
-    static var preview: MyMemoWidgetAttributes {
-        MyMemoWidgetAttributes(name: "World")
+private extension DaylitWidgetAttributes {
+    static var preview: DaylitWidgetAttributes {
+        DaylitWidgetAttributes(name: "World")
     }
 }
 
-private extension MyMemoWidgetAttributes.ContentState {
-    static var smiley: MyMemoWidgetAttributes.ContentState {
-        MyMemoWidgetAttributes.ContentState(emoji: "😀")
+private extension DaylitWidgetAttributes.ContentState {
+    static var smiley: DaylitWidgetAttributes.ContentState {
+        DaylitWidgetAttributes.ContentState(emoji: "😀")
     }
 
-    static var starEyes: MyMemoWidgetAttributes.ContentState {
-        MyMemoWidgetAttributes.ContentState(emoji: "🤩")
+    static var starEyes: DaylitWidgetAttributes.ContentState {
+        DaylitWidgetAttributes.ContentState(emoji: "🤩")
     }
 }
 
 @available(iOS 18.0, *)
-#Preview("Notification", as: .content, using: MyMemoWidgetAttributes.preview) {
-    MyMemoWidgetLiveActivity()
+#Preview("Notification", as: .content, using: DaylitWidgetAttributes.preview) {
+    DaylitWidgetLiveActivity()
 } contentStates: {
-    MyMemoWidgetAttributes.ContentState.smiley
-    MyMemoWidgetAttributes.ContentState.starEyes
+    DaylitWidgetAttributes.ContentState.smiley
+    DaylitWidgetAttributes.ContentState.starEyes
 }

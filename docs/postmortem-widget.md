@@ -38,7 +38,7 @@
 
 **증상**:
 - 위젯을 홈 화면에 추가해도 `getTimeline()` 함수가 호출되지 않음
-- App Group (`group.com.p2glet.MyMemo`) 설정은 되어있음
+- App Group (`group.com.p2glet.Daylit`) 설정은 되어있음
 - 메인 앱에서 데이터를 저장하면 plist 파일에 정상적으로 기록됨
 - `WidgetCenter.shared.reloadAllTimelines()` 호출도 코드에 존재
 
@@ -56,9 +56,9 @@
 
 **확인한 것들**:
 1. **project.pbxproj 분석**:
-   - 메인 앱 Bundle ID: `com.p2glet.MyMemo` ✅
-   - 위젯 Bundle ID: `com.p2glet.MyMemo.MyMemoWidget` ✅ (올바른 계층구조)
-   - 위젯 타겟 존재 확인: `MyMemoWidgetExtension` ✅
+   - 메인 앱 Bundle ID: `com.p2glet.Daylit` ✅
+   - 위젯 Bundle ID: `com.p2glet.Daylit.DaylitWidget` ✅ (올바른 계층구조)
+   - 위젯 타겟 존재 확인: `DaylitWidgetExtension` ✅
 
 2. **Info.plist 확인**:
    - NSExtensionPointIdentifier = "com.apple.widgetkit-extension" ✅
@@ -67,7 +67,7 @@
    ```bash
    pluginkit -m -p com.apple.widgetkit-extension
    ```
-   - 결과: `com.p2glet.MyMemo.MyMemoWidget(1.0)` 등록됨 ✅
+   - 결과: `com.p2glet.Daylit.DaylitWidget(1.0)` 등록됨 ✅
 
 4. **바이너리 심볼 확인**:
    ```bash
@@ -87,7 +87,7 @@
 xcrun simctl spawn <UUID> log stream --process chronod --level debug
 
 # 위젯 프로세스 로그
-xcrun simctl spawn <UUID> log stream --predicate 'processImagePath CONTAINS "MyMemoWidget"'
+xcrun simctl spawn <UUID> log stream --predicate 'processImagePath CONTAINS "DaylitWidget"'
 ```
 
 **사용자 액션**: 위젯 삭제 → 재추가
@@ -106,7 +106,7 @@ xcrun simctl spawn <UUID> log stream --predicate 'processImagePath CONTAINS "MyM
 
 **확인 결과**:
 ```bash
-ls MyMemoWidget/Assets.xcassets/AppIcon.appiconset/
+ls DaylitWidget/Assets.xcassets/AppIcon.appiconset/
 ```
 - `Contents.json` 존재 ✅
 - **AppIcon.png 파일 없음** ❌
@@ -137,7 +137,7 @@ WidgetKit은 최소한의 AppIcon이 없으면 해당 extension을 유효하지 
 
 **재빌드 및 설치 후 결과**:
 ```
-[MyMemo.MyMemoWidget-0D7AD1085F40] Session operation: 'getTimelines(1)' request.
+[Daylit.DaylitWidget-0D7AD1085F40] Session operation: 'getTimelines(1)' request.
 reload: succeeded with 1 entries
 ```
 ✅ getTimeline()이 드디어 호출됨!
@@ -152,7 +152,7 @@ reload: succeeded with 1 entries
 **가설**: Entry 구조체나 View 렌더링 문제?
 
 **확인 작업**:
-1. `MyMemoWidget.swift` 읽기:
+1. `DaylitWidget.swift` 읽기:
    - Entry 구조체: `weekData: [(date: Date, memos: [WidgetMemo])]` ✅
    - getTimeline()에서 `WidgetDataManager.shared.getThisWeekMemos()` 호출 ✅
    - View에서 `entry.weekData` 올바르게 참조 ✅
@@ -160,12 +160,12 @@ reload: succeeded with 1 entries
 2. **위젯 프로세스 로그 확인**:
    ```
    found no value for key widget_memos in CFPrefsSearchListSource
-   (Domain: group.com.p2glet.MyMemo, Container: (null))
+   (Domain: group.com.p2glet.Daylit, Container: (null))
    ```
 
 3. **App Group plist 직접 확인**:
    ```bash
-   plutil -p .../Library/Preferences/group.com.p2glet.MyMemo.plist
+   plutil -p .../Library/Preferences/group.com.p2glet.Daylit.plist
    ```
    결과:
    ```
@@ -184,7 +184,7 @@ reload: succeeded with 1 entries
 
 **확인 방법**:
 ```bash
-codesign -d --entitlements - /path/to/MyMemoWidgetExtension.appex
+codesign -d --entitlements - /path/to/DaylitWidgetExtension.appex
 ```
 
 **결과**:
@@ -203,8 +203,8 @@ codesign -d --entitlements - /path/to/MyMemoWidgetExtension.appex
 
 **엔타이틀먼트 파일은 존재**:
 ```bash
-ls -la MyMemoWidget/
--rw-r--r--  MyMemoWidget.entitlements  # 존재함!
+ls -la DaylitWidget/
+-rw-r--r--  DaylitWidget.entitlements  # 존재함!
 ```
 
 **파일 내용**:
@@ -212,7 +212,7 @@ ls -la MyMemoWidget/
 <dict>
     <key>com.apple.security.application-groups</key>
     <array>
-        <string>group.com.p2glet.MyMemo</string>
+        <string>group.com.p2glet.Daylit</string>
     </array>
 </dict>
 ```
@@ -221,31 +221,31 @@ ls -la MyMemoWidget/
 
 **project.pbxproj 확인**:
 ```
-# 메인 앱 (MyMemo target)
-CODE_SIGN_ENTITLEMENTS = MyMemo/MyMemo.entitlements;  ✅
+# 메인 앱 (Daylit target)
+CODE_SIGN_ENTITLEMENTS = Daylit/Daylit.entitlements;  ✅
 
-# 위젯 타겟 (MyMemoWidgetExtension)
+# 위젯 타겟 (DaylitWidgetExtension)
 # CODE_SIGN_ENTITLEMENTS 설정이 아예 없음!  ❌
 ```
 
 **해결책**:
 `project.pbxproj`의 위젯 타겟 Debug/Release 설정에 추가:
 ```
-CODE_SIGN_ENTITLEMENTS = MyMemoWidget/MyMemoWidget.entitlements;
+CODE_SIGN_ENTITLEMENTS = DaylitWidget/DaylitWidget.entitlements;
 ```
 (라인 454, 486)
 
 **중간 빌드 파일 확인으로 검증**:
 ```bash
-cat .../MyMemoWidgetExtension.build/.../MyMemoWidgetExtension.appex-Simulated.xcent
+cat .../DaylitWidgetExtension.build/.../DaylitWidgetExtension.appex-Simulated.xcent
 ```
 ```xml
 <dict>
     <key>application-identifier</key>
-    <string>USP329MK32.com.p2glet.MyMemo.MyMemoWidget</string>
+    <string>USP329MK32.com.p2glet.Daylit.DaylitWidget</string>
     <key>com.apple.security.application-groups</key>
     <array>
-        <string>group.com.p2glet.MyMemo</string>
+        <string>group.com.p2glet.Daylit</string>
     </array>
 </dict>
 ```
@@ -258,8 +258,8 @@ cat .../MyMemoWidgetExtension.build/.../MyMemoWidgetExtension.appex-Simulated.xc
 
 **Xcode 빌드 에러**:
 ```
-MyMemoWidgetLiveActivity.swift:33:13 Generic parameter 'Expanded' could not be inferred
-MyMemoWidgetLiveActivity.swift:33:27 Result builder 'DynamicIslandExpandedContentBuilder' does not implement...
+DaylitWidgetLiveActivity.swift:33:13 Generic parameter 'Expanded' could not be inferred
+DaylitWidgetLiveActivity.swift:33:27 Result builder 'DynamicIslandExpandedContentBuilder' does not implement...
 ```
 
 **원인**: iOS 18+ API를 deployment target iOS 16.0에서 사용
@@ -281,7 +281,7 @@ if #available(iOS 18.0, *) {
 ## 진짜 원인 (최종 정리)
 
 ### 1. AppIcon 리소스 누락 ⭐⭐⭐
-- **위치**: `MyMemoWidget/Assets.xcassets/AppIcon.appiconset/`
+- **위치**: `DaylitWidget/Assets.xcassets/AppIcon.appiconset/`
 - **문제**: `AppIcon.png` 파일 자체가 존재하지 않음
 - **증상**: WidgetKit이 extension을 유효하지 않은 것으로 간주하고 chronod가 getTimeline()을 호출하지 않음
 - **특징**: 에러 메시지가 전혀 없음. 시스템이 조용히 무시함
@@ -289,7 +289,7 @@ if #available(iOS 18.0, *) {
 - **영향도**: 완전한 기능 불능 (위젯 프로세스 자체가 시작 안 됨)
 
 ### 2. CODE_SIGN_ENTITLEMENTS 빌드 설정 누락 ⭐⭐⭐
-- **위치**: `MyMemo.xcodeproj/project.pbxproj`
+- **위치**: `Daylit.xcodeproj/project.pbxproj`
 - **문제**: 위젯 타겟의 Debug/Release 빌드 설정에 `CODE_SIGN_ENTITLEMENTS` 키가 없음
 - **증상**:
   - getTimeline()은 호출됨
@@ -300,7 +300,7 @@ if #available(iOS 18.0, *) {
 - **영향도**: 데이터 읽기 완전 실패
 
 ### 3. Live Activity iOS 18 API 호환성 (부수적)
-- **위치**: `MyMemoWidgetLiveActivity.swift`
+- **위치**: `DaylitWidgetLiveActivity.swift`
 - **문제**: iOS 18+ API를 iOS 16.0 deployment target에서 사용
 - **해결**: `@available` 추가
 - **영향도**: 빌드 에러 (위젯 기능과 무관)
@@ -334,7 +334,7 @@ codesign -d --entitlements - <binary_path>
 
 ### 4. 중간 빌드 파일 확인 ⭐⭐
 ```bash
-cat .../MyMemoWidgetExtension.build/.../MyMemoWidgetExtension.appex-Simulated.xcent
+cat .../DaylitWidgetExtension.build/.../DaylitWidgetExtension.appex-Simulated.xcent
 ```
 - **효과**: Xcode가 entitlements를 어떻게 처리하는지 확인
 - **발견 사항**: CODE_SIGN_ENTITLEMENTS 추가 후 이 파일에 App Groups가 나타남
@@ -357,7 +357,7 @@ nm debug.dylib | grep getTimeline
 ### 7. 위젯 프로세스 로그 필터링 ⭐⭐
 ```bash
 xcrun simctl spawn <UUID> log stream \
-  --predicate 'processImagePath CONTAINS "MyMemoWidget"' \
+  --predicate 'processImagePath CONTAINS "DaylitWidget"' \
   --level debug
 ```
 - **효과**: 위젯 extension 내부의 UserDefaults 접근 실패 로그 확인
@@ -487,7 +487,7 @@ WidgetKit은 많은 경우 에러를 표시하지 않고 조용히 실패함:
 **작성일**: 2026-09-03
 **작성자**: Claude (Sonnet 4.5)
 **관련 파일**:
-- `MyMemo.xcodeproj/project.pbxproj` (라인 454, 486)
-- `MyMemoWidget/Assets.xcassets/AppIcon.appiconset/`
-- `MyMemoWidget/MyMemoWidget.entitlements`
-- `MyMemoWidget/MyMemoWidgetLiveActivity.swift` (라인 33, 95)
+- `Daylit.xcodeproj/project.pbxproj` (라인 454, 486)
+- `DaylitWidget/Assets.xcassets/AppIcon.appiconset/`
+- `DaylitWidget/DaylitWidget.entitlements`
+- `DaylitWidget/DaylitWidgetLiveActivity.swift` (라인 33, 95)
