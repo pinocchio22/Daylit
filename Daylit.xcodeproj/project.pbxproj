@@ -3,25 +3,75 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1A000001 /* MyMemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A000000 /* MyMemoApp.swift */; };
+		1A000001 /* DaylitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A000000 /* DaylitApp.swift */; };
 		1A000003 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A000002 /* ContentView.swift */; };
 		1A000005 /* Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A000004 /* Memo.swift */; };
 		1A000007 /* MemoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A000006 /* MemoDetailView.swift */; };
 		1A000009 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A000008 /* Assets.xcassets */; };
+		1A00001A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A000020 /* SettingsView.swift */; };
+		778CA9033045C26B00B0E7EB /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 778CA9023045C26B00B0E7EB /* WidgetKit.framework */; };
+		778CA9053045C26B00B0E7EB /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 778CA9043045C26B00B0E7EB /* SwiftUI.framework */; };
+		778CA9143045C26E00B0E7EB /* DaylitWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 778CA9003045C26B00B0E7EB /* DaylitWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		778CA91C3045C33100B0E7EB /* WidgetDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778CA91B3045C33100B0E7EB /* WidgetDataManager.swift */; };
+		778CA91D3045C34B00B0E7EB /* WidgetDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778CA91B3045C33100B0E7EB /* WidgetDataManager.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		778CA9123045C26E00B0E7EB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A000013 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 778CA8FF3045C26B00B0E7EB;
+			remoteInfo = DaylitWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		778CA9153045C26E00B0E7EB /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				778CA9143045C26E00B0E7EB /* DaylitWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		1A000000 /* MyMemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMemoApp.swift; sourceTree = "<group>"; };
+		1A000000 /* DaylitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaylitApp.swift; sourceTree = "<group>"; };
 		1A000002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		1A000004 /* Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo.swift; sourceTree = "<group>"; };
 		1A000006 /* MemoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoDetailView.swift; sourceTree = "<group>"; };
 		1A000008 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		1A00000A /* MyMemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyMemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A00000A /* Daylit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Daylit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A000019 /* Daylit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Daylit.entitlements; sourceTree = "<group>"; };
+		1A000020 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		778CA9003045C26B00B0E7EB /* DaylitWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DaylitWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		778CA9023045C26B00B0E7EB /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		778CA9043045C26B00B0E7EB /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		778CA91B3045C33100B0E7EB /* WidgetDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		778CA9183045C26E00B0E7EB /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 778CA8FF3045C26B00B0E7EB /* DaylitWidgetExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		778CA9063045C26B00B0E7EB /* DaylitWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (778CA9183045C26E00B0E7EB /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = DaylitWidget; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		1A00000B /* Frameworks */ = {
@@ -31,25 +81,39 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		778CA8FD3045C26B00B0E7EB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				778CA9053045C26B00B0E7EB /* SwiftUI.framework in Frameworks */,
+				778CA9033045C26B00B0E7EB /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1A00000C /* MyMemo */ = {
+		1A00000C /* Daylit */ = {
 			isa = PBXGroup;
 			children = (
-				1A000000 /* MyMemoApp.swift */,
+				1A000000 /* DaylitApp.swift */,
 				1A000002 /* ContentView.swift */,
 				1A000004 /* Memo.swift */,
 				1A000006 /* MemoDetailView.swift */,
+				1A000020 /* SettingsView.swift */,
 				1A000008 /* Assets.xcassets */,
+				1A000019 /* Daylit.entitlements */,
 			);
-			path = MyMemo;
+			path = Daylit;
 			sourceTree = "<group>";
 		};
 		1A00000D = {
 			isa = PBXGroup;
 			children = (
-				1A00000C /* MyMemo */,
+				778CA91B3045C33100B0E7EB /* WidgetDataManager.swift */,
+				1A00000C /* Daylit */,
+				778CA9063045C26B00B0E7EB /* DaylitWidget */,
+				778CA9013045C26B00B0E7EB /* Frameworks */,
 				1A00000E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -57,30 +121,64 @@
 		1A00000E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1A00000A /* MyMemo.app */,
+				1A00000A /* Daylit.app */,
+				778CA9003045C26B00B0E7EB /* DaylitWidgetExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		778CA9013045C26B00B0E7EB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				778CA9023045C26B00B0E7EB /* WidgetKit.framework */,
+				778CA9043045C26B00B0E7EB /* SwiftUI.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1A00000F /* MyMemo */ = {
+		1A00000F /* Daylit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1A000010 /* Build configuration list for PBXNativeTarget "MyMemo" */;
+			buildConfigurationList = 1A000010 /* Build configuration list for PBXNativeTarget "Daylit" */;
 			buildPhases = (
 				1A000011 /* Sources */,
 				1A00000B /* Frameworks */,
 				1A000012 /* Resources */,
+				778CA9153045C26E00B0E7EB /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				778CA9133045C26E00B0E7EB /* PBXTargetDependency */,
+			);
+			name = Daylit;
+			productName = Daylit;
+			productReference = 1A00000A /* Daylit.app */;
+			productType = "com.apple.product-type.application";
+		};
+		778CA8FF3045C26B00B0E7EB /* DaylitWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 778CA9193045C26E00B0E7EB /* Build configuration list for PBXNativeTarget "DaylitWidgetExtension" */;
+			buildPhases = (
+				778CA8FC3045C26B00B0E7EB /* Sources */,
+				778CA8FD3045C26B00B0E7EB /* Frameworks */,
+				778CA8FE3045C26B00B0E7EB /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = MyMemo;
-			productName = MyMemo;
-			productReference = 1A00000A /* MyMemo.app */;
-			productType = "com.apple.product-type.application";
+			fileSystemSynchronizedGroups = (
+				778CA9063045C26B00B0E7EB /* DaylitWidget */,
+			);
+			name = DaylitWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = DaylitWidgetExtension;
+			productReference = 778CA9003045C26B00B0E7EB /* DaylitWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -89,10 +187,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1500;
+				LastSwiftUpdateCheck = 2610;
 				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					778CA8FF3045C26B00B0E7EB = {
+						CreatedOnToolsVersion = 26.1.1;
+					};
+				};
 			};
-			buildConfigurationList = 1A000014 /* Build configuration list for PBXProject "MyMemo" */;
+			buildConfigurationList = 1A000014 /* Build configuration list for PBXProject "Daylit" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -105,7 +208,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1A00000F /* MyMemo */,
+				1A00000F /* Daylit */,
+				778CA8FF3045C26B00B0E7EB /* DaylitWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -119,6 +223,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		778CA8FE3045C26B00B0E7EB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -129,11 +240,29 @@
 				1A000003 /* ContentView.swift in Sources */,
 				1A000005 /* Memo.swift in Sources */,
 				1A000007 /* MemoDetailView.swift in Sources */,
-				1A000001 /* MyMemoApp.swift in Sources */,
+				778CA91D3045C34B00B0E7EB /* WidgetDataManager.swift in Sources */,
+				1A00001A /* SettingsView.swift in Sources */,
+				1A000001 /* DaylitApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		778CA8FC3045C26B00B0E7EB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				778CA91C3045C33100B0E7EB /* WidgetDataManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		778CA9133045C26E00B0E7EB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 778CA8FF3045C26B00B0E7EB /* DaylitWidgetExtension */;
+			targetProxy = 778CA9123045C26E00B0E7EB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1A000015 /* Debug */ = {
@@ -260,6 +389,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Daylit/Daylit.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
@@ -276,7 +406,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.p2glet.MyMemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.p2glet.Daylit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -289,6 +419,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Daylit/Daylit.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
@@ -305,9 +436,73 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.p2glet.MyMemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.p2glet.Daylit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		778CA9163045C26E00B0E7EB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = DaylitWidget/DaylitWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = USP329MK32;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DaylitWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = DaylitWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.p2glet.Daylit.DaylitWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		778CA9173045C26E00B0E7EB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = DaylitWidget/DaylitWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = USP329MK32;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DaylitWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = DaylitWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.p2glet.Daylit.DaylitWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -316,7 +511,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1A000010 /* Build configuration list for PBXNativeTarget "MyMemo" */ = {
+		1A000010 /* Build configuration list for PBXNativeTarget "Daylit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1A000017 /* Debug */,
@@ -325,11 +520,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1A000014 /* Build configuration list for PBXProject "MyMemo" */ = {
+		1A000014 /* Build configuration list for PBXProject "Daylit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1A000015 /* Debug */,
 				1A000016 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		778CA9193045C26E00B0E7EB /* Build configuration list for PBXNativeTarget "DaylitWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				778CA9163045C26E00B0E7EB /* Debug */,
+				778CA9173045C26E00B0E7EB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

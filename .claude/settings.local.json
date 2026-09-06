@@ -11,7 +11,9 @@
       "Bash(tee:*)",
       "Bash(xcrun simctl uninstall:*)",
       "Bash(xcrun simctl io:*)",
-      "Read(//tmp/**)"
+      "Read(//tmp/**)",
+      "Bash(git checkout:*)",
+      "Bash(gh pr create:*)"
     ],
     "deny": [],
     "ask": []
