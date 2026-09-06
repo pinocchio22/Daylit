@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,7 +13,36 @@
 		1A000007 /* MemoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A000006 /* MemoDetailView.swift */; };
 		1A000009 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A000008 /* Assets.xcassets */; };
 		1A00001A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A000020 /* SettingsView.swift */; };
+		778CA9033045C26B00B0E7EB /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 778CA9023045C26B00B0E7EB /* WidgetKit.framework */; };
+		778CA9053045C26B00B0E7EB /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 778CA9043045C26B00B0E7EB /* SwiftUI.framework */; };
+		778CA9143045C26E00B0E7EB /* MyMemoWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 778CA9003045C26B00B0E7EB /* MyMemoWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		778CA91C3045C33100B0E7EB /* WidgetDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778CA91B3045C33100B0E7EB /* WidgetDataManager.swift */; };
+		778CA91D3045C34B00B0E7EB /* WidgetDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778CA91B3045C33100B0E7EB /* WidgetDataManager.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		778CA9123045C26E00B0E7EB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A000013 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 778CA8FF3045C26B00B0E7EB;
+			remoteInfo = MyMemoWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		778CA9153045C26E00B0E7EB /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				778CA9143045C26E00B0E7EB /* MyMemoWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1A000000 /* MyMemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMemoApp.swift; sourceTree = "<group>"; };
@@ -24,13 +53,42 @@
 		1A00000A /* MyMemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyMemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A000019 /* MyMemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyMemo.entitlements; sourceTree = "<group>"; };
 		1A000020 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		778CA9003045C26B00B0E7EB /* MyMemoWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MyMemoWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		778CA9023045C26B00B0E7EB /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		778CA9043045C26B00B0E7EB /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		778CA91B3045C33100B0E7EB /* WidgetDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		778CA9183045C26E00B0E7EB /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+				MyMemoWidgetControl.swift,
+				MyMemoWidgetLiveActivity.swift,
+			);
+			target = 778CA8FF3045C26B00B0E7EB /* MyMemoWidgetExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		778CA9063045C26B00B0E7EB /* MyMemoWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (778CA9183045C26E00B0E7EB /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = MyMemoWidget; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		1A00000B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		778CA8FD3045C26B00B0E7EB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				778CA9053045C26B00B0E7EB /* SwiftUI.framework in Frameworks */,
+				778CA9033045C26B00B0E7EB /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,7 +112,10 @@
 		1A00000D = {
 			isa = PBXGroup;
 			children = (
+				778CA91B3045C33100B0E7EB /* WidgetDataManager.swift */,
 				1A00000C /* MyMemo */,
+				778CA9063045C26B00B0E7EB /* MyMemoWidget */,
+				778CA9013045C26B00B0E7EB /* Frameworks */,
 				1A00000E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -63,8 +124,18 @@
 			isa = PBXGroup;
 			children = (
 				1A00000A /* MyMemo.app */,
+				778CA9003045C26B00B0E7EB /* MyMemoWidgetExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		778CA9013045C26B00B0E7EB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				778CA9023045C26B00B0E7EB /* WidgetKit.framework */,
+				778CA9043045C26B00B0E7EB /* SwiftUI.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -77,15 +148,39 @@
 				1A000011 /* Sources */,
 				1A00000B /* Frameworks */,
 				1A000012 /* Resources */,
+				778CA9153045C26E00B0E7EB /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				778CA9133045C26E00B0E7EB /* PBXTargetDependency */,
 			);
 			name = MyMemo;
 			productName = MyMemo;
 			productReference = 1A00000A /* MyMemo.app */;
 			productType = "com.apple.product-type.application";
+		};
+		778CA8FF3045C26B00B0E7EB /* MyMemoWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 778CA9193045C26E00B0E7EB /* Build configuration list for PBXNativeTarget "MyMemoWidgetExtension" */;
+			buildPhases = (
+				778CA8FC3045C26B00B0E7EB /* Sources */,
+				778CA8FD3045C26B00B0E7EB /* Frameworks */,
+				778CA8FE3045C26B00B0E7EB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				778CA9063045C26B00B0E7EB /* MyMemoWidget */,
+			);
+			name = MyMemoWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = MyMemoWidgetExtension;
+			productReference = 778CA9003045C26B00B0E7EB /* MyMemoWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -94,8 +189,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1500;
+				LastSwiftUpdateCheck = 2610;
 				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					778CA8FF3045C26B00B0E7EB = {
+						CreatedOnToolsVersion = 26.1.1;
+					};
+				};
 			};
 			buildConfigurationList = 1A000014 /* Build configuration list for PBXProject "MyMemo" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -111,6 +211,7 @@
 			projectRoot = "";
 			targets = (
 				1A00000F /* MyMemo */,
+				778CA8FF3045C26B00B0E7EB /* MyMemoWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -124,6 +225,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		778CA8FE3045C26B00B0E7EB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -134,12 +242,29 @@
 				1A000003 /* ContentView.swift in Sources */,
 				1A000005 /* Memo.swift in Sources */,
 				1A000007 /* MemoDetailView.swift in Sources */,
+				778CA91D3045C34B00B0E7EB /* WidgetDataManager.swift in Sources */,
 				1A00001A /* SettingsView.swift in Sources */,
 				1A000001 /* MyMemoApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		778CA8FC3045C26B00B0E7EB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				778CA91C3045C33100B0E7EB /* WidgetDataManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		778CA9133045C26E00B0E7EB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 778CA8FF3045C26B00B0E7EB /* MyMemoWidgetExtension */;
+			targetProxy = 778CA9123045C26E00B0E7EB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1A000015 /* Debug */ = {
@@ -321,6 +446,70 @@
 			};
 			name = Release;
 		};
+		778CA9163045C26E00B0E7EB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = MyMemoWidget/MyMemoWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = USP329MK32;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyMemoWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MyMemoWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.p2glet.MyMemo.MyMemoWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		778CA9173045C26E00B0E7EB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = MyMemoWidget/MyMemoWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = USP329MK32;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyMemoWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MyMemoWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.p2glet.MyMemo.MyMemoWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -338,6 +527,15 @@
 			buildConfigurations = (
 				1A000015 /* Debug */,
 				1A000016 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		778CA9193045C26E00B0E7EB /* Build configuration list for PBXNativeTarget "MyMemoWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				778CA9163045C26E00B0E7EB /* Debug */,
+				778CA9173045C26E00B0E7EB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

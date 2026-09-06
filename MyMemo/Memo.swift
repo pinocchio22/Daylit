@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import WidgetKit
 
 extension Color {
     // Color를 Hex String으로 변환
@@ -128,6 +129,23 @@ class MemoStore: ObservableObject {
         if useICloudSync {
             iCloudStore.synchronize()
         }
+
+        // 위젯 초기 동기화 - 기존 메모를 위젯에 전달
+        syncToWidget()
+    }
+
+    private func syncToWidget() {
+        let widgetMemos = memos.map { memo in
+            WidgetMemo(
+                id: memo.id.uuidString,
+                title: memo.title,
+                createdAt: memo.createdAt,
+                categoryName: memo.category.name,
+                categoryColor: memo.category.color
+            )
+        }
+        WidgetDataManager.shared.saveMemos(widgetMemos)
+        WidgetCenter.shared.reloadAllTimelines()
     }
 
     deinit {
@@ -193,6 +211,9 @@ class MemoStore: ObservableObject {
                 UserDefaults.standard.set(encoded, forKey: memosKey)
             }
         }
+
+        // 위젯 동기화
+        syncToWidget()
     }
 
     private func loadMemos() {
