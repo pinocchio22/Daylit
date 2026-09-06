@@ -13,6 +13,7 @@
 		1A000007 /* MemoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A000006 /* MemoDetailView.swift */; };
 		1A000009 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A000008 /* Assets.xcassets */; };
 		1A00001A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A000020 /* SettingsView.swift */; };
+		1A000021 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A000022 /* NotificationManager.swift */; };
 		778CA9033045C26B00B0E7EB /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 778CA9023045C26B00B0E7EB /* WidgetKit.framework */; };
 		778CA9053045C26B00B0E7EB /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 778CA9043045C26B00B0E7EB /* SwiftUI.framework */; };
 		778CA9143045C26E00B0E7EB /* DaylitWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 778CA9003045C26B00B0E7EB /* DaylitWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -53,10 +54,11 @@
 		1A00000A /* Daylit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Daylit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A000019 /* Daylit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Daylit.entitlements; sourceTree = "<group>"; };
 		1A000020 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		1A000022 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		778CA9003045C26B00B0E7EB /* DaylitWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DaylitWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		778CA9023045C26B00B0E7EB /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		778CA9043045C26B00B0E7EB /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		778CA91B3045C33100B0E7EB /* WidgetDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDataManager.swift; sourceTree = "<group>"; };
+		778CA91B3045C33100B0E7EB /* WidgetDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Daylit/WidgetDataManager.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -101,6 +103,7 @@
 				1A000004 /* Memo.swift */,
 				1A000006 /* MemoDetailView.swift */,
 				1A000020 /* SettingsView.swift */,
+				1A000022 /* NotificationManager.swift */,
 				1A000008 /* Assets.xcassets */,
 				1A000019 /* Daylit.entitlements */,
 			);
@@ -242,6 +245,7 @@
 				1A000007 /* MemoDetailView.swift in Sources */,
 				778CA91D3045C34B00B0E7EB /* WidgetDataManager.swift in Sources */,
 				1A00001A /* SettingsView.swift in Sources */,
+				1A000021 /* NotificationManager.swift in Sources */,
 				1A000001 /* DaylitApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

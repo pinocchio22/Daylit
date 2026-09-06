@@ -50,11 +50,12 @@ struct Category: Identifiable, Codable, Equatable, Hashable {
     var id = UUID()
     var name: String
     var color: String // Hex 색상 저장 (예: "#FF5733")
+    var notificationEnabled: Bool = true // 알림 활성화 여부
 
     static let defaultCategories = [
-        Category(name: "업무", color: "#007AFF"),    // 파란색
-        Category(name: "개인", color: "#34C759"),    // 초록색
-        Category(name: "아이디어", color: "#AF52DE")  // 보라색
+        Category(name: "업무", color: "#007AFF", notificationEnabled: true),
+        Category(name: "개인", color: "#34C759", notificationEnabled: true),
+        Category(name: "아이디어", color: "#AF52DE", notificationEnabled: true)
     ]
 
     var uiColor: Color {
@@ -132,6 +133,9 @@ class MemoStore: ObservableObject {
 
         // 위젯 초기 동기화 - 기존 메모를 위젯에 전달
         syncToWidget()
+
+        // 알림 권한 요청 및 초기 알림 설정
+        requestNotificationPermission()
     }
 
     private func syncToWidget() {
@@ -214,6 +218,9 @@ class MemoStore: ObservableObject {
 
         // 위젯 동기화
         syncToWidget()
+
+        // 알림 갱신
+        refreshNotifications()
     }
 
     private func loadMemos() {
@@ -311,5 +318,30 @@ class MemoStore: ObservableObject {
            let decoded = try? JSONDecoder().decode([SearchHistory].self, from: data) {
             searchHistory = decoded
         }
+    }
+
+    // MARK: - 알림 관련 메서드
+    func updateCategoryNotification(at index: Int, enabled: Bool) {
+        guard index < categories.count else { return }
+        categories[index].notificationEnabled = enabled
+        saveCategories()
+        refreshNotifications()
+    }
+
+    private func requestNotificationPermission() {
+        NotificationManager.shared.requestAuthorization { granted in
+            if granted {
+                print("✅ 알림 권한 허용됨")
+                DispatchQueue.main.async {
+                    self.refreshNotifications()
+                }
+            } else {
+                print("❌ 알림 권한 거부됨")
+            }
+        }
+    }
+
+    private func refreshNotifications() {
+        NotificationManager.shared.refreshAllNotifications(memos: memos, categories: categories)
     }
 }

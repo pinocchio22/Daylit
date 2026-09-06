@@ -19,6 +19,7 @@ struct DaylitWidgetAttributes: ActivityAttributes {
     var name: String
 }
 
+@available(iOS 16.1, *)
 struct DaylitWidgetLiveActivity: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: DaylitWidgetAttributes.self) { context in
@@ -30,48 +31,31 @@ struct DaylitWidgetLiveActivity: Widget {
             .activitySystemActionForegroundColor(Color.black)
 
         } dynamicIsland: { context in
-            if #available(iOS 18.0, *) {
-                DynamicIsland {
-                    // Expanded UI goes here.  Compose the expanded UI through
-                    // various regions, like leading/trailing/center/bottom
-                    DynamicIslandExpandedRegion(.leading) {
-                        Text("Leading")
-                    }
-                    DynamicIslandExpandedRegion(.trailing) {
-                        Text("Trailing")
-                    }
-                    DynamicIslandExpandedRegion(.bottom) {
-                        Text("Bottom \(context.state.emoji)")
-                        // more content
-                    }
-                } compactLeading: {
-                    Text("L")
-                } compactTrailing: {
-                    Text("T \(context.state.emoji)")
-                } minimal: {
-                    Text(context.state.emoji)
+            DynamicIsland {
+                // Expanded UI goes here.  Compose the expanded UI through
+                // various regions, like leading/trailing/center/bottom
+                DynamicIslandExpandedRegion(.leading) {
+                    Text("Leading")
                 }
-                .widgetURL(URL(string: "http://www.apple.com"))
-                .keylineTint(Color.red)
-            } else {
-                DynamicIsland {
-                    DynamicIslandExpandedRegion(.leading) {
-                        Text("Leading")
-                    }
-                    DynamicIslandExpandedRegion(.trailing) {
-                        Text("Trailing")
-                    }
-                    DynamicIslandExpandedRegion(.bottom) {
-                        Text("Bottom")
-                    }
-                } compactLeading: {
-                    Text("L")
-                } compactTrailing: {
-                    Text("T")
-                } minimal: {
-                    Text("M")
+                DynamicIslandExpandedRegion(.trailing) {
+                    Text("Trailing")
                 }
+                DynamicIslandExpandedRegion(.center) {
+                    Text("Center")
+                }
+                DynamicIslandExpandedRegion(.bottom) {
+                    Text("Bottom \(context.state.emoji)")
+                    // more content
+                }
+            } compactLeading: {
+                Text("L")
+            } compactTrailing: {
+                Text("T \(context.state.emoji)")
+            } minimal: {
+                Text(context.state.emoji)
             }
+            .widgetURL(URL(string: "http://www.apple.com"))
+            .keylineTint(Color.red)
         }
     }
 }

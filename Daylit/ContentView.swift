@@ -391,7 +391,7 @@ struct ContentView: View {
                 AddMemoView(memoStore: memoStore)
             }
             .sheet(isPresented: $showingSettings) {
-                SettingsView()
+                SettingsView(memoStore: memoStore)
             }
             .alert("메모 삭제", isPresented: $showingDeleteAlert) {
                 Button("취소", role: .cancel) { }
